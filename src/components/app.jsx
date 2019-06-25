@@ -34,7 +34,7 @@ class App extends React.Component {
     var updatedMovieListData = this.state.allMovies.slice();
     newMovie.title = name;
     updatedMovieListData.push(newMovie);
-    updatedMovieListData.forEach((movie, index) => { // Add an ID for whole movie list
+    updatedMovieListData.forEach((movie, index) => { // Add an ID for entire movie list
       movie.allId = index;
     })
     this.setState({
@@ -44,7 +44,8 @@ class App extends React.Component {
     callback();
   }
 
-  toggleWatched(index) {
+  // TODO: ask why we don't need to update filteredData
+  toggleWatched(index) { // index here is the index of entire movielist rather than of filtered movielist
     var updatedMovieListData = this.state.allMovies.slice();
     updatedMovieListData[index].watched = !updatedMovieListData[index].watched;
     this.setState({
