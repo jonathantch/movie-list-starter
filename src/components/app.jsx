@@ -15,6 +15,7 @@ class App extends React.Component {
 
     this.search = this.search.bind(this);
     this.addMovie = this.addMovie.bind(this);
+    this.toggleWatched = this.toggleWatched.bind(this);
   }
 
   // reference movieListData directly so it doesn't get double filtered
@@ -29,10 +30,13 @@ class App extends React.Component {
   }
 
   addMovie(name, callback = () => {}) {
-    var newMovie = {};
+    var newMovie = {watched: false};
     var updatedMovieListData = this.state.allMovies.slice();
     newMovie.title = name;
     updatedMovieListData.push(newMovie);
+    updatedMovieListData.forEach((movie, index) => { // Add an ID for whole movie list
+      movie.allId = index;
+    })
     this.setState({
       allMovies: updatedMovieListData,
       filteredMovies: updatedMovieListData
@@ -40,12 +44,20 @@ class App extends React.Component {
     callback();
   }
 
+  toggleWatched(index) {
+    var updatedMovieListData = this.state.allMovies.slice();
+    updatedMovieListData[index].watched = !updatedMovieListData[index].watched;
+    this.setState({
+      allMovies: updatedMovieListData
+    })
+  }
+
   render() {
     return (
       <div className="app">
         <AddMovie addMovie={this.addMovie}/>
         <Search search={this.search}/>
-        <MovieList movies={this.state.filteredMovies}/>
+        <MovieList movies={this.state.filteredMovies} toggleWatched={this.toggleWatched}/>
       </div>
     )
   }
