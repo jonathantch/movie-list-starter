@@ -54,7 +54,7 @@ class MovieList extends React.Component {
           <button onClick={this.onClickShowAllHandler}>Show All</button>
           {
             this.props.movies.map((ele) => {
-              return <MovieListEntry movie={ele} key={ele.title} index={ele.allId} toggleWatched={this.props.toggleWatched}/>
+              return <MovieListEntry movie={ele} key={ele.id} index={ele.id - 1} toggleWatched={this.props.toggleWatched}/>
             })
           }
         </div>
@@ -68,10 +68,10 @@ class MovieList extends React.Component {
           {
             this.props.movies
             .filter((ele) => {
-              return ele.watched === true;
+              return ele.watched === 1;
             })
             .map((ele) => {
-              return <MovieListEntry movie={ele} key={ele.title} index={ele.allId} toggleWatched={this.props.toggleWatched}/>
+              return <MovieListEntry movie={ele} key={ele.id} index={ele.id - 1} toggleWatched={this.props.toggleWatched}/>
             })
           }
         </div>
@@ -85,10 +85,10 @@ class MovieList extends React.Component {
           {
             this.props.movies
             .filter((ele) => {
-              return ele.watched === false;
+              return ele.watched === 0;
             })
             .map((ele) => {
-              return <MovieListEntry movie={ele} key={ele.title} index={ele.allId} toggleWatched={this.props.toggleWatched}/>
+              return <MovieListEntry movie={ele} key={ele.id} index={ele.id - 1} toggleWatched={this.props.toggleWatched}/>
             })
           }
         </div>
